@@ -34,3 +34,4 @@ You can give these links directly to your app developer:
 - **Events API:** `https://<your-username>.github.io/<repo-name>/decrypted_output/events.json`
 - **Channels API:** `https://<your-username>.github.io/<repo-name>/decrypted_output/channels.json`
 "# dudetvappapi" 
+"# api" 
