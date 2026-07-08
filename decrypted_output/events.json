@@ -30,18 +30,6 @@
     "order_index": 5
   },
   {
-    "id": 346,
-    "event": "{\"eventDetails\":{\"category\":\"Cricket\",\"eventName\":\"Sobers-Tissera Trophy\",\"eventLogo\":\"http:\\/\\/api.sofascore.com\\/api\\/v1\\/unique-tournament\\/33863\\/image\\/dark\"},\"teamA\":{\"name\":\"WI\",\"logo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/team\\/187760\\/image\"},\"teamB\":{\"name\":\"SL\",\"logo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/team\\/187756\\/image\"},\"visible\":true,\"priority\":-1,\"date\":\"08\\/07\\/2026\",\"time\":\"14:00:00\",\"link_names\":[\"FANCODE \",\"TAPMAD \",\"FANCODE - LQ\",\"SD SERVER \"],\"links\":\"pro\\/U29iZXJzLVRpc3NlcmEgVHJvcGh5LVdJLXZzLVNMMTc4MjY1NjU3MTg1MA.txt\"}",
-    "links": "[{\"name\":\"FANCODE \",\"link\":\"https:\\/\\/otte.cache.aiv-cdn.net\\/bom-nitro\\/live\\/clients\\/dash\\/enc\\/inpyms8ezu\\/out\\/v1\\/1084d5c9a97a4c5b9f9554c88f486646\\/cenc.mpd\",\"scheme\":0,\"api\":\"065051b99bf5cf8d9a3bde5cbde6aaf9:214bd176832872339ce184338320f9a2\",\"tokenApi\":\"\"},{\"name\":\"TAPMAD \",\"link\":\"https:\\/\\/saseries.akamaized.net\\/hls\\/live\\/2110097\\/ICCt20-tapmad\\/master.m3u8\",\"scheme\":0,\"api\":\"\",\"tokenApi\":\"\"},{\"name\":\"FANCODE - LQ\",\"link\":\"https:\\/\\/otte.cache.aiv-cdn.net\\/bom-nitro\\/live\\/clients\\/dash-sd\\/enc\\/v8g0dlo4z8\\/out\\/v1\\/946019f85dc64ae99ff9ce64a9727a62\\/cenc-sd.mpd\",\"scheme\":0,\"api\":\"5689304538fa9f3bb3da99c939a2ad4f:6907c88ed8ebdd35a2fa80b9684715e1\",\"tokenApi\":\"\"},{\"name\":\"SD SERVER \",\"link\":\"http:\\/\\/193.47.62.42\\/hls\\/HAHAHAEEQQ.m3u8?|Referer=http:\\/\\/www.fawanews.sc\\/&Origin=http:\\/\\/www.fawanews.sc\\/\",\"scheme\":0,\"api\":\"\",\"tokenApi\":\"\"}]",
-    "order_index": 6
-  },
-  {
-    "id": 354,
-    "event": "{\"eventDetails\":{\"category\":\"Tennis\",\"eventName\":\"Tennis | Wimbledon Championships\",\"eventLogo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/unique-tournament\\/2361\\/image\"},\"teamA\":{\"name\":\"Wimbledon\",\"logo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/unique-tournament\\/2361\\/image\"},\"teamB\":{\"name\":\"Wimbledon\",\"logo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/unique-tournament\\/2361\\/image\"},\"visible\":true,\"priority\":-1,\"date\":\"08\\/07\\/2026\",\"time\":\"10:00:00\",\"link_names\":[\"TSN SPORTS - AQ\",\"TSN5 SPORTS - AQ\",\"ESPN SPORTS - AQ\",\"SP0TV \",\"SP0TV2 - AQ\",\"EUROSPORT \",\"ESPN SPORTS SD\",\"TSN SPORTS SD\"],\"links\":\"pro\\/VGVubmlzIHwgV2ltYmxlZG9uIENoYW1waW9uc2hpcHMtV2ltYmxlZG9uLXZzLVdpbWJsZWRvbjE3ODI4MTg4MzU5ODE.txt\"}",
-    "links": "[{\"name\":\"TSN SPORTS - AQ\",\"link\":\"https:\\/\\/otte.cache.aiv-cdn.net\\/bom-nitro\\/live\\/clients\\/dash\\/enc\\/cscevwljkq\\/out\\/v1\\/972185041b244140860b7d56398e9aaf\\/cenc.mpd|user-agent=Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/149.0.0.0 Safari\\/537.36\",\"scheme\":0,\"api\":\"385ceb9714b75e0cef61254f80b31002:18dce92a2891fee68d21ede5173230f8\",\"tokenApi\":\"\"},{\"name\":\"TSN5 SPORTS - AQ\",\"link\":\"https:\\/\\/otte.cache.aiv-cdn.net\\/bom-nitro\\/live\\/clients\\/dash\\/enc\\/cscevwljkq\\/out\\/v1\\/972185041b244140860b7d56398e9aaf\\/cenc.mpd|user-agent=Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/149.0.0.0 Safari\\/537.36\",\"scheme\":0,\"api\":\"385ceb9714b75e0cef61254f80b31002:18dce92a2891fee68d21ede5173230f8\",\"tokenApi\":\"\"},{\"name\":\"ESPN SPORTS - AQ\",\"link\":\"https:\\/\\/otte.cache.aiv-cdn.net\\/bom-nitro\\/live\\/clients\\/dash\\/enc\\/cjglydxghe\\/out\\/v1\\/8977baf175da4b94873194613dd3fe55\\/cenc.mpd|user-agent=Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/149.0.0.0 Safari\\/537.36\",\"scheme\":0,\"api\":\"85b277daf5aae05833fe43a68f587968:d52d7e9bc0bcd98787efd547ac91eca0\",\"tokenApi\":\"\"},{\"name\":\"SP0TV \",\"link\":\"https:\\/\\/qp-pldt-live-bpk-01-prod.akamaized.net\\/bpk-tv\\/cg_spotvhd\\/default\\/index.mpd\",\"scheme\":0,\"api\":\"ec7ee27d83764e4b845c48cca31c8eef:9c0e4191203fccb0fde34ee29999129e\",\"tokenApi\":\"\"},{\"name\":\"SP0TV2 - AQ\",\"link\":\"https:\\/\\/qp-pldt-live-grp-13-prod.akamaized.net\\/out\\/u\\/dr_spotv2hd.mpd\",\"scheme\":0,\"api\":\"7eea72d6075245a99ee3255603d58853:6848ef60575579bf4d415db1032153ed\",\"tokenApi\":\"\"},{\"name\":\"EUROSPORT \",\"link\":\"https:\\/\\/dash2.antik.sk\\/stream\\/nvidia_eurosport2\\/playlist_cenc.mpd\",\"scheme\":0,\"api\":\"11223344556677889900112233445566:4b80724d0ef86bcb2c21f7999d67739d\",\"tokenApi\":\"\"},{\"name\":\"ESPN SPORTS SD\",\"link\":\"https:\\/\\/xstm.250909.cc\\/live\\/SPORTSFLUX-PRD-33990-1\\/31b4468de9ac\\/1638.m3u8\",\"scheme\":0,\"api\":\"\",\"tokenApi\":\"\"},{\"name\":\"TSN SPORTS SD\",\"link\":\"https:\\/\\/xstm.250909.cc\\/live\\/SPORTSFLUX-PRD-33990-1\\/31b4468de9ac\\/1636.m3u8\",\"scheme\":0,\"api\":\"\",\"tokenApi\":\"\"}]",
-    "order_index": 8
-  },
-  {
     "id": 361,
     "event": "{\"eventDetails\":{\"category\":\"Football\",\"eventName\":\"World Championship\",\"eventLogo\":\"http:\\/\\/api.sofascore.com\\/api\\/v1\\/unique-tournament\\/16\\/image\\/dark\"},\"teamA\":{\"name\":\"France\",\"logo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/team\\/4481\\/image\"},\"teamB\":{\"name\":\"Morocco\",\"logo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/team\\/4778\\/image\"},\"visible\":true,\"date\":\"09\\/07\\/2026\",\"time\":\"20:00:00\",\"end_date\":\"09\\/07\\/2026\",\"end_time\":\"22:20:00\",\"links\":\"pro\\/V29ybGQgQ2hhbXBpb25zaGlwLUZyYW5jZS12cy1Nb3JvY2NvMTc4MzQ0OTkzMTQ5Mg.txt\"}",
     "links": "[{\"name\":\"Link 1\",\"link\":\"http:\\/\\/cricfy-tv.net\\/promo\\/cricfy-promo.m3u8\"}]",
@@ -64,5 +52,41 @@
     "event": "{\"eventDetails\":{\"category\":\"Football\",\"eventName\":\"World Championship\",\"eventLogo\":\"http:\\/\\/api.sofascore.com\\/api\\/v1\\/unique-tournament\\/16\\/image\\/dark\"},\"teamA\":{\"name\":\"Norway\",\"logo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/team\\/4475\\/image\"},\"teamB\":{\"name\":\"England\",\"logo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/team\\/4713\\/image\"},\"visible\":true,\"date\":\"11\\/07\\/2026\",\"time\":\"21:00:00\",\"end_date\":\"11\\/07\\/2026\",\"end_time\":\"23:20:00\",\"links\":\"pro\\/V29ybGQgQ2hhbXBpb25zaGlwLU5vcndheS12cy1FbmdsYW5kMTc4MzQ0OTk2NDcwNw.txt\"}",
     "links": "[{\"name\":\"Link 1\",\"link\":\"http:\\/\\/cricfy-tv.net\\/promo\\/cricfy-promo.m3u8\"}]",
     "order_index": 12
+  },
+  {
+    "id": 365,
+    "event": "{\"eventDetails\":{\"category\":\"Cricket\",\"eventName\":\"One Day International\",\"eventLogo\":\"http:\\/\\/api.sofascore.com\\/api\\/v1\\/unique-tournament\\/11190\\/image\\/dark\"},\"teamA\":{\"name\":\"ZIM\",\"logo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/team\\/187745\\/image\"},\"teamB\":{\"name\":\"BAN\",\"logo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/team\\/187744\\/image\"},\"visible\":true,\"date\":\"09\\/07\\/2026\",\"time\":\"07:30:00\",\"links\":\"pro\\/T25lIERheSBJbnRlcm5hdGlvbmFsLVpJTS12cy1CQU4xNzgzNTE5MTgyNzU5.txt\"}",
+    "links": "[{\"name\":\"Link 1\",\"link\":\"http:\\/\\/cricfy-tv.net\\/promo\\/cricfy-promo.m3u8\"}]",
+    "order_index": 13
+  },
+  {
+    "id": 366,
+    "event": "{\"eventDetails\":{\"category\":\"Cricket\",\"eventName\":\"Major League Cricket\",\"eventLogo\":\"http:\\/\\/api.sofascore.com\\/api\\/v1\\/unique-tournament\\/20583\\/image\\/dark\"},\"teamA\":{\"name\":\"WF\",\"logo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/team\\/485015\\/image\"},\"teamB\":{\"name\":\"LAKR\",\"logo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/team\\/485011\\/image\"},\"visible\":true,\"date\":\"10\\/07\\/2026\",\"time\":\"00:30:00\",\"links\":\"pro\\/TWFqb3IgTGVhZ3VlIENyaWNrZXQtV0YtdnMtTEFLUjE3ODM1MTkxODI3NTk.txt\"}",
+    "links": "[{\"name\":\"Link 1\",\"link\":\"http:\\/\\/cricfy-tv.net\\/promo\\/cricfy-promo.m3u8\"}]",
+    "order_index": 14
+  },
+  {
+    "id": 367,
+    "event": "{\"eventDetails\":{\"category\":\"Cricket\",\"eventName\":\"Major League Cricket\",\"eventLogo\":\"http:\\/\\/api.sofascore.com\\/api\\/v1\\/unique-tournament\\/20583\\/image\\/dark\"},\"teamA\":{\"name\":\"MINY\",\"logo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/team\\/485012\\/image\"},\"teamB\":{\"name\":\"SFU\",\"logo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/team\\/485013\\/image\"},\"visible\":true,\"date\":\"09\\/07\\/2026\",\"time\":\"00:30:00\",\"links\":\"pro\\/TWFqb3IgTGVhZ3VlIENyaWNrZXQtTUlOWS12cy1TRlUxNzgzNTE5MTgyNzU5.txt\"}",
+    "links": "[{\"name\":\"Link 1\",\"link\":\"http:\\/\\/cricfy-tv.net\\/promo\\/cricfy-promo.m3u8\"}]",
+    "order_index": 15
+  },
+  {
+    "id": 368,
+    "event": "{\"eventDetails\":{\"category\":\"Cricket\",\"eventName\":\"ICC Women's Championship\",\"eventLogo\":\"http:\\/\\/api.sofascore.com\\/api\\/v1\\/unique-tournament\\/18793\\/image\\/dark\"},\"teamA\":{\"name\":\"IRE-W\",\"logo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/team\\/213116\\/image\"},\"teamB\":{\"name\":\"WI-W\",\"logo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/team\\/213120\\/image\"},\"visible\":true,\"date\":\"10\\/07\\/2026\",\"time\":\"09:45:00\",\"links\":\"pro\\/SUNDIFdvbWVuJ3MgQ2hhbXBpb25zaGlwLUlSRS1XLXZzLVdJLVcxNzgzNTE5MTgyNzU5.txt\"}",
+    "links": "[{\"name\":\"Link 1\",\"link\":\"http:\\/\\/cricfy-tv.net\\/promo\\/cricfy-promo.m3u8\"}]",
+    "order_index": 16
+  },
+  {
+    "id": 369,
+    "event": "{\"eventDetails\":{\"category\":\"Cricket\",\"eventName\":\"Test International, Women\",\"eventLogo\":\"http:\\/\\/api.sofascore.com\\/api\\/v1\\/unique-tournament\\/18794\\/image\\/dark\"},\"teamA\":{\"name\":\"ENG-W\",\"logo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/team\\/213121\\/image\"},\"teamB\":{\"name\":\"IND-W\",\"logo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/team\\/213119\\/image\"},\"visible\":true,\"date\":\"10\\/07\\/2026\",\"time\":\"10:00:00\",\"links\":\"pro\\/VGVzdCBJbnRlcm5hdGlvbmFsLCBXb21lbi1FTkctVy12cy1JTkQtVzE3ODM1MTkxODI3NTk.txt\"}",
+    "links": "[{\"name\":\"Link 1\",\"link\":\"http:\\/\\/cricfy-tv.net\\/promo\\/cricfy-promo.m3u8\"}]",
+    "order_index": 17
+  },
+  {
+    "id": 370,
+    "event": "{\"eventDetails\":{\"category\":\"Cricket\",\"eventName\":\"T20 International\",\"eventLogo\":\"http:\\/\\/api.sofascore.com\\/api\\/v1\\/unique-tournament\\/11191\\/image\\/dark\"},\"teamA\":{\"name\":\"ENG\",\"logo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/team\\/187757\\/image\"},\"teamB\":{\"name\":\"IND\",\"logo\":\"https:\\/\\/img.sofascore.com\\/api\\/v1\\/team\\/187765\\/image\"},\"visible\":true,\"date\":\"09\\/07\\/2026\",\"time\":\"16:30:00\",\"links\":\"pro\\/VDIwIEludGVybmF0aW9uYWwtRU5HLXZzLUlORDE3ODM1MTkxODI3NTk.txt\"}",
+    "links": "[{\"name\":\"Link 1\",\"link\":\"http:\\/\\/cricfy-tv.net\\/promo\\/cricfy-promo.m3u8\"}]",
+    "order_index": 18
   }
 ]
