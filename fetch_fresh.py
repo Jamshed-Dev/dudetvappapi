@@ -1,176 +1,250 @@
-import time
-import urllib.request
-import binascii
+﻿import urllib.request
 import base64
 import json
 import os
+import sys
 from Crypto.Cipher import AES
 
-# Load dynamic configuration
+sys.stdout.reconfigure(encoding="utf-8")
+
+# Load Config
 config_path = "app_control.json"
 if not os.path.exists(config_path):
-    # Fallback to defaults if file is missing
-    active_name = "cricfy"
-    profile = {
-        "genz_url": "https://p.genzdev.xyz/2-xmnhab.json",
-        "token": "8f4gha9affeegg7cigafdgc7hegfkefaicigdgg1haffhekgeeigcfgahedfhef",
-        "aes_key": "WT1sdkEvUlR4ckd2",
-        "aes_iv": "Q7sKcm9LR4VaX2pN",
-        "xor_key": 90,
-        "keys": {
-            "event_cats.json": "2c68753f2c3f342e05393b2e29742e222e",
-            "events.json": "2c68753f2c3f342e29742e222e",
-            "channels.json": "2c687539323b34343f3629750f69182c39340820131f322c380d0f3d0f12102c170e3968150e0b6a170e1769151e036a171b742e222e"
-        }
-    }
-else:
-    with open(config_path, "r", encoding="utf-8") as f:
-        config = json.load(f)
-    active_name = config.get("active_source", "cricfy")
-    profile = config["sources"][active_name]
+    print("Error: app_control.json not found.")
+    sys.exit(1)
 
-print(f"Active Source Profile: {active_name}")
+with open(config_path, "r", encoding="utf-8") as f:
+    config = json.load(f)
 
-genz_url = profile["genz_url"]
-token = profile["token"]
-aes_key_bytes = profile["aes_key"].encode('utf-8')
-aes_iv_bytes = profile["aes_iv"].encode('utf-8')
-xor_key_val = profile["xor_key"]
+active_source = config.get("active_source", "crexify")
+profile = config["sources"][active_source]
+api_url = profile["api_url"]
 keys = profile["keys"]
 
-def encrypt_xor_hex(text):
-    data = text.encode('utf-8')
-    encrypted = bytes([b ^ xor_key_val for b in data])
-    return binascii.hexlify(encrypted).decode('utf-8')
-
-def cfgMaterial():
-    bArr = [29, 88, 17, 104, 66, 7, 91, 34, 113, 5, 47, 96]
-    bArr2 = [71, 12, 83, 44, 9, 121, 36, 58, 101, 22, 63]
-    bArr3 = [6, 39, 95, 14, 74, 52, 117, 27, 68, 3, 86, 41, 109]
-    bArr4 = bytearray(32)
-    for i in range(32):
-        i10 = bArr[i % 12] & 255
-        i11 = bArr2[((i * 3) + 1) % 11] & 255
-        i12 = i & 7
-        
-        shift_r = 8 - i12
-        term1 = (i11 & 0xffffffff) >> shift_r
-        term2 = (i11 << i12) & 0xffffffff
-        rotated = (term1 | term2) & 255
-        
-        val = (((i10 ^ rotated) ^ (bArr3[((i * 5) + 2) % 13] & 255)) ^ 90) ^ i
-        bArr4[i] = val & 255
-    return bArr4
-
-def decrypt_cfj1(str_val):
-    str_val = str_val.strip()
-    if str_val.startswith("cfj1:"):
-        str_val = str_val[5:]
-    
-    str_val = str_val.replace("\r", "").replace("\n", "").replace("\t", "").replace(" ", "")
-    bArrDecode = base64.b64decode(str_val)
-    bArrCfgMaterial = cfgMaterial()
-    bArr = bytearray(len(bArrDecode))
-    
-    for i in range(len(bArrDecode)):
-        val = (((bArrCfgMaterial[i % len(bArrCfgMaterial)] & 255) ^ bArrDecode[i]) ^ (((i * 29) + 71) & 255)) & 255
-        bArr[len(bArrDecode) - 1 - i] = val
-        
-    return bArr.decode('utf-8', errors='ignore')
-
-def swap_pairs(chars):
-    for i in range(0, len(chars) - 1, 2):
-        chars[i], chars[i+1] = chars[i+1], chars[i]
-    return chars
-
-def reverse_chars(chars):
-    return chars[::-1]
-
-def clean_base64(s):
-    sb = []
-    for c in s:
-        if ('A' <= c <= 'Z') or ('a' <= c <= 'z') or ('0' <= c <= '9') or c == '+' or c == '/':
-            sb.append(c)
-    s_cleaned = "".join(sb)
-    while len(s_cleaned) % 4 != 0:
-        s_cleaned += '='
-    return s_cleaned
-
-def decrypt_aes_v2(ciphertext):
-    cipher = AES.new(aes_key_bytes, AES.MODE_CBC, aes_iv_bytes)
-    decrypted = cipher.decrypt(ciphertext)
-    pad_len = decrypted[-1]
-    if 1 <= pad_len <= 16:
-        if all(x == pad_len for x in decrypted[-pad_len:]):
-            decrypted = decrypted[:-pad_len]
-    return decrypted
-
-def decode_v2(encoded_str):
-    try:
-        decoded_bytes = base64.b64decode(encoded_str)
-        char_array = list(decoded_bytes.decode('utf-8', errors='ignore'))
-        char_array = swap_pairs(char_array)
-        char_array = reverse_chars(char_array)
-        decoded_str2 = "".join(char_array)
-        
-        if not decoded_str2.endswith("abcdefghijklmnop"):
-            return f"Error: Decoded stage 1 does not end with abcdefghijklmnop. Output was: {decoded_str2[:100]}..."
-        
-        sub_str = decoded_str2[:-len("abcdefghijklmnop")]
-        sub_bytes = base64.b64decode(sub_str)
-        decrypted_aes = decrypt_aes_v2(sub_bytes)
-        
-        char_array_aes = list(decrypted_aes.decode('utf-8', errors='ignore'))
-        char_array_aes = swap_pairs(char_array_aes)
-        char_array_aes = reverse_chars(char_array_aes)
-        
-        cleaned_b64 = clean_base64("".join(char_array_aes))
-        final_bytes = base64.b64decode(cleaned_b64)
-        return final_bytes.decode('utf-8', errors='ignore')
-    except Exception as e:
-        return f"Decoding error: {e}"
-
-def make_request(url):
-    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 Cricfy2/1.0'})
-    response = urllib.request.urlopen(req, timeout=15)
-    return response.read().decode('utf-8').strip()
-
-# Target directory
 out_dir = "decrypted_output"
 os.makedirs(out_dir, exist_ok=True)
 
-# 1. Decrypt genzdev config
-if genz_url:
-    print("Processing URL 1 (GenzDev)...")
+github_user = os.environ.get("GITHUB_REPOSITORY_OWNER", "mdjamsad9")
+github_repo = os.environ.get("GITHUB_REPOSITORY", "mdjamsad9/apiv2").split("/")[-1]
+pages_base = f"https://{github_user}.github.io/{github_repo}/decrypted_output"
+
+print(f"API Source: {api_url}")
+print(f"Pages Base: {pages_base}")
+
+def decrypt_aes(ciphertext, key, iv):
     try:
-        raw_genz = make_request(genz_url)
-        dec_genz = decrypt_cfj1(raw_genz)
-        parsed_genz = json.loads(dec_genz)
-        with open(os.path.join(out_dir, "genzdev_config.json"), "w", encoding="utf-8") as f:
-            json.dump(parsed_genz, f, indent=2, ensure_ascii=False)
-        print("-> Decrypted genzdev_config.json successfully!")
+        cipher = AES.new(key, AES.MODE_CBC, iv)
+        dec = cipher.decrypt(ciphertext)
+        pad_len = dec[-1]
+        if 1 <= pad_len <= 16 and all(x == pad_len for x in dec[-pad_len:]):
+            dec = dec[:-pad_len]
+        return dec
     except Exception as e:
-        print("-> Failed URL 1:", e)
+        print(f"  AES Error: {e}")
+        return None
 
-# Token for HMAC
-current_time = int(time.time())
-fresh_hmac_plain = f"{current_time}|{token}"
-fresh_hmac_encrypted = encrypt_xor_hex(fresh_hmac_plain)
+def make_request(url, timeout=20):
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=timeout) as response:
+            return response.read()
+    except Exception as e:
+        print(f"  Request failed for {url}: {e}")
+        return None
 
-for filename, key in keys.items():
-    if not key:
+def decrypt_file(raw_bytes, label="file"):
+    if not raw_bytes:
+        return None
+    try:
+        cleaned = "".join(raw_bytes.decode("utf-8").strip().split())
+        while len(cleaned) % 4 != 0:
+            cleaned += "="
+        ciphertext = base64.b64decode(cleaned)
+        print(f"  [{label}] ciphertext: {len(ciphertext)} bytes")
+    except Exception as e:
+        print(f"  [{label}] Base64 decode error: {e}")
+        return None
+
+    key_b = keys["Crexify_SetB"]["aes_key"].encode("utf-8")
+    iv_b  = keys["Crexify_SetB"]["aes_iv"].encode("utf-8")
+    result = decrypt_aes(ciphertext, key_b, iv_b)
+    if result and result[0:1] in [b"{", b"["]:
+        print(f"  [{label}] SetB OK")
+        return result
+
+    key_a = keys["Crexify_SetA"]["aes_key"].encode("utf-8")
+    iv_a  = keys["Crexify_SetA"]["aes_iv"].encode("utf-8")
+    result = decrypt_aes(ciphertext, key_a, iv_a)
+    if result and result[0:1] in [b"{", b"["]:
+        print(f"  [{label}] SetA OK")
+        return result
+
+    print(f"  [{label}] WARNING: no valid JSON start with either key")
+    return decrypt_aes(ciphertext, key_b, iv_b)
+
+success_count = 0
+
+# 1. app.json
+print("\n=== app.txt ===")
+raw = make_request(f"{api_url}app.txt")
+dec = decrypt_file(raw, "app.txt")
+if dec:
+    try:
+        app_data = json.loads(dec.decode("utf-8", errors="ignore"))
+        def inject_url(obj):
+            if isinstance(obj, list):
+                for item in obj:
+                    inject_url(item)
+            elif isinstance(obj, dict):
+                obj["api_url"] = pages_base + "/"
+                obj["new_api"] = pages_base + "/"
+                if "web_url" in obj:
+                    obj["web_url"] = pages_base + "/"
+        inject_url(app_data)
+        with open(os.path.join(out_dir, "app.json"), "w", encoding="utf-8") as f:
+            json.dump(app_data, f, indent=2, ensure_ascii=False)
+        print("-> app.json saved")
+        success_count += 1
+    except Exception as e:
+        print(f"-> app.json parse error: {e}")
+else:
+    print("-> app.txt failed")
+
+# 2. event_cats.json
+print("\n=== event_cats.txt ===")
+raw = make_request(f"{api_url}event_cats.txt")
+dec = decrypt_file(raw, "event_cats.txt")
+if dec:
+    try:
+        data = json.loads(dec.decode("utf-8", errors="ignore"))
+        with open(os.path.join(out_dir, "event_cats.json"), "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+        print("-> event_cats.json saved")
+        success_count += 1
+    except Exception as e:
+        print(f"-> parse error: {e}, preview: {dec[:80]}")
+else:
+    print("-> event_cats.txt failed")
+
+# 3. categories.json
+print("\n=== categories.txt ===")
+raw = make_request(f"{api_url}categories.txt")
+dec = decrypt_file(raw, "categories.txt")
+raw_channels = []
+if dec:
+    try:
+        cats = json.loads(dec.decode("utf-8", errors="ignore"))
+        if isinstance(cats, list):
+            for cat in cats:
+                if isinstance(cat, dict):
+                    ch = cat.get("channels", [])
+                    if isinstance(ch, list):
+                        raw_channels.extend(ch)
+        def update_ch_links(obj):
+            if isinstance(obj, list):
+                for item in obj:
+                    update_ch_links(item)
+            elif isinstance(obj, dict):
+                lnk = obj.get("links", "")
+                if lnk and lnk.startswith("channels/"):
+                    obj["links"] = f"{pages_base}/{lnk}"
+        update_ch_links(cats)
+        with open(os.path.join(out_dir, "categories.json"), "w", encoding="utf-8") as f:
+            json.dump(cats, f, indent=2, ensure_ascii=False)
+        print(f"-> categories.json saved ({len(raw_channels)} channels found)")
+        success_count += 1
+    except Exception as e:
+        print(f"-> parse error: {e}, preview: {dec[:80]}")
+else:
+    print("-> categories.txt failed")
+
+# 4. events.json
+print("\n=== events.txt ===")
+raw = make_request(f"{api_url}events.txt")
+dec = decrypt_file(raw, "events.txt")
+events_list = []
+if dec:
+    try:
+        data = json.loads(dec.decode("utf-8", errors="ignore"))
+        events_list = data if isinstance(data, list) else []
+        for event in events_list:
+            if isinstance(event, dict):
+                lnk = event.get("links", "")
+                if lnk and lnk.startswith("pro/"):
+                    event["links"] = f"{pages_base}/{lnk}"
+        with open(os.path.join(out_dir, "events.json"), "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+        print(f"-> events.json saved ({len(events_list)} events)")
+        success_count += 1
+    except Exception as e:
+        print(f"-> parse error: {e}, preview: {dec[:80]}")
+else:
+    print("-> events.txt failed")
+
+# 5. Pro files
+pro_dir = os.path.join(out_dir, "pro")
+os.makedirs(pro_dir, exist_ok=True)
+print(f"\n=== Pro stream files ({len(events_list)} events) ===")
+pro_saved = 0
+for event in events_list:
+    if not isinstance(event, dict):
         continue
-    url = f"https://cricyplayers.com/data/getData.php?key={key}&hmac={fresh_hmac_encrypted}"
-    print(f"Processing key {key} -> {filename}...")
-    try:
-        raw_res = make_request(url)
-        dec_res = decode_v2(raw_res)
-        parsed_res = json.loads(dec_res)
-        
-        with open(os.path.join(out_dir, filename), "w", encoding="utf-8") as f:
-            json.dump(parsed_res, f, indent=2, ensure_ascii=False)
-        print(f"-> Decrypted {filename} successfully!")
-    except Exception as e:
-        print(f"-> Failed {filename}: {e}")
+    lnk = event.get("links", "")
+    if "pro/" in lnk:
+        filename = lnk.split("pro/")[-1]
+        if not filename:
+            continue
+        raw = make_request(f"{api_url}pro/{filename}")
+        dec = decrypt_file(raw, filename[:25])
+        if dec:
+            try:
+                out_path = os.path.join(pro_dir, filename)
+                try:
+                    pro_data = json.loads(dec.decode("utf-8", errors="ignore"))
+                    with open(out_path, "w", encoding="utf-8") as f:
+                        json.dump(pro_data, f, indent=2, ensure_ascii=False)
+                except Exception:
+                    with open(out_path, "w", encoding="utf-8") as f:
+                        f.write(dec.decode("utf-8", errors="ignore"))
+                pro_saved += 1
+            except Exception as e:
+                print(f"    Save error: {e}")
+print(f"-> {pro_saved}/{len(events_list)} pro files saved")
 
-print("\nDone! Decrypted files written to directory:", os.path.abspath(out_dir))
+# 6. Channel files
+ch_dir = os.path.join(out_dir, "channels")
+os.makedirs(ch_dir, exist_ok=True)
+print(f"\n=== Channel files ({len(raw_channels)} channels) ===")
+ch_saved = 0
+for ch in raw_channels:
+    if not isinstance(ch, dict):
+        continue
+    lnk = ch.get("links", "")
+    if "channels/" in lnk:
+        filename = lnk.split("channels/")[-1]
+        if not filename:
+            continue
+        raw = make_request(f"{api_url}channels/{filename}")
+        dec = decrypt_file(raw, filename[:25])
+        if dec:
+            try:
+                out_path = os.path.join(ch_dir, filename)
+                try:
+                    ch_data = json.loads(dec.decode("utf-8", errors="ignore"))
+                    with open(out_path, "w", encoding="utf-8") as f:
+                        json.dump(ch_data, f, indent=2, ensure_ascii=False)
+                except Exception:
+                    with open(out_path, "w", encoding="utf-8") as f:
+                        f.write(dec.decode("utf-8", errors="ignore"))
+                ch_saved += 1
+            except Exception as e:
+                print(f"    Save error: {e}")
+print(f"-> {ch_saved}/{len(raw_channels)} channel files saved")
+
+# Summary
+print(f"\n{'='*50}")
+print(f"SUMMARY: {success_count}/4 main | {pro_saved} pro | {ch_saved} channels")
+if success_count == 0:
+    print("ERROR: No main files decrypted!")
+    sys.exit(1)
+print("Done!")
